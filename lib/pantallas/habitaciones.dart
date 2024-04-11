@@ -7,6 +7,7 @@ import 'package:flutter/widgets.dart';
 import 'package:hotel_aplicacion/dbHelper/MongoHabitaciones.dart';
 import 'package:hotel_aplicacion/dbHelper/constant.dart';
 import 'package:hotel_aplicacion/dbHelper/mongodb.dart';
+import 'package:hotel_aplicacion/pantallas/insertarhabitacion.dart';
 import 'package:hotel_aplicacion/pantallas/reservarhabitacion.dart';
 class habitaciones extends StatefulWidget {
   const habitaciones({super.key});
@@ -93,7 +94,23 @@ Widget displayCard(MongoHabitaciones data,BuildContext context){
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                   const Text("Reserva aqui:",style: TextStyle(fontWeight: FontWeight.bold),),
+                   const Text("Editar: ",style: TextStyle(fontWeight: FontWeight.bold),),
+              IconButton(onPressed: (){
+                Navigator.push(
+                     context,
+                    MaterialPageRoute(
+                    builder: (BuildContext context){
+                      return insertarHabitacion();
+                    },
+                    settings: RouteSettings(arguments: data)
+                    ));
+              }, icon: const Icon(Icons.edit),
+                  iconSize: 50,
+                  color: Colors.yellow,                
+                  highlightColor: Colors.black,
+                  
+              ),
+              const Text("Eliminar",style: TextStyle(fontWeight: FontWeight.bold),),
               IconButton(onPressed: (){
                 Navigator.push(
                      context,
@@ -103,7 +120,7 @@ Widget displayCard(MongoHabitaciones data,BuildContext context){
                     },
                     settings: RouteSettings(arguments: data)
                     ));
-              }, icon: const Icon(Icons.calendar_month_sharp),
+              }, icon: const Icon(Icons.delete),
                   iconSize: 50,
                   color: Colors.yellow,                
                   highlightColor: Colors.black,

@@ -4,7 +4,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hotel_aplicacion/dbHelper/mongodb.dart';
+import 'package:hotel_aplicacion/pantallas/habitaciones.dart';
 import 'package:hotel_aplicacion/pantallas/pantalla1.dart';
+import 'package:hotel_aplicacion/pantallas/pantallainicio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
@@ -45,6 +47,23 @@ void guardarValorBoolPref(String key, bool value) async {
     );
   }
 }*/
+
+class pruebap1 extends StatefulWidget {
+  const pruebap1({super.key});
+
+  @override
+  State<pruebap1> createState() => _pruebap1State();
+}
+
+class _pruebap1State extends State<pruebap1> {
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+            debugShowCheckedModeBanner: false,
+            home: pantalla1(), // Redirige al usuario a la pantalla1 si la conexión se establece correctamente
+          );
+  }
+}
 
 class MyApp extends StatefulWidget {
   @override

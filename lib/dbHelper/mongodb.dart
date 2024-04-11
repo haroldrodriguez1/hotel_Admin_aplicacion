@@ -6,6 +6,8 @@ import 'package:flutter/foundation.dart';
 import 'package:hotel_aplicacion/dbHelper/ModelTarjeta.dart';
 import 'package:hotel_aplicacion/dbHelper/MongoDBModel.dart';
 import 'package:hotel_aplicacion/dbHelper/MongoDbModelReserva.dart';
+import 'package:hotel_aplicacion/dbHelper/MongoDisplayNotificaciones.dart';
+import 'package:hotel_aplicacion/dbHelper/MongoHabitaciones.dart';
 import 'package:hotel_aplicacion/dbHelper/MongoModelReportar.dart';
 import 'package:hotel_aplicacion/dbHelper/constant.dart';
 import 'package:hotel_aplicacion/pantallas/pantalla1.dart';
@@ -56,11 +58,11 @@ class MongoDatabase {
        userCollection = db!.collection('notificaciones');
     final query = {
     
-    'username': publicusername,
+    //'username': publicusername,
     
 
   };
-    final arrData = await userCollection.find(query).toList();
+    final arrData = await userCollection.find().toList();
     return arrData;
 
   }
@@ -76,7 +78,6 @@ static Future<List<Map<String, dynamic>>> getDataReservas() async {
   // Crear el filtro de consulta
   final query = {
     'fechainicio': {r'$gte': fechaMananaFormatted},
-    'usuario': publicusername,
     'estado': "Pendiente",
   };
 
@@ -202,6 +203,45 @@ static Future<List<Map<String, dynamic>>> getDataHistorial() async {
       return(e.toString());
     }
   }
+   static Future<String> insertHabitacion(MongoHabitaciones data) async {
+    try {
+      var result = await userCollection.insertOne(data.toJson());
+      if (result.isSuccess){
+        return "DATOS INSERTADOS";
+      }else {
+        return "ERROR INESPERADO";
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print(e.toString());
+      }
+      return(e.toString());
+    }
+  }
+
+ static Future<String> insertNotificacion( ModelDisplayNotificaciones data) async {
+    try {
+            userCollection = db!.collection('notificaciones');
+
+      var result = await userCollection.insertOne(data.toJson());
+      if (result.isSuccess){
+        print("DATOS INSERTADOS") ;
+                        return "result";
+
+        
+      }else {
+        print("DATOS INSERTADOS") ;
+                return "result";
+
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print(" Problema al insertar ${e.toString()}");
+      }
+      return(e.toString());
+    }
+  }
+
   static Future<String> insertProblema(ReportarProblemaModel data) async {
     try {
       userCollection = db!.collection('problemas');
@@ -277,7 +317,7 @@ try {
   return getuser;
   
 }
-   static Future<void> updateReserva(MongoReservaHabitaciones data) async {
+   static Future<void> updateReserva(MongoReservaHabitaciones data,String estado) async {
     userCollection = db!.collection('reservas');
     
   try {
@@ -290,7 +330,7 @@ try {
       result['estado'] = 'Pagado';
       var response = await userCollection.update(result); */
       
-      var response = await userCollection.updateOne(where.eq('_id',data.id),modify.set('estado','Pagado'));
+      var response = await userCollection.updateOne(where.eq('_id',data.id),modify.set('estado',estado));
      
       inspect(response);
     } else {

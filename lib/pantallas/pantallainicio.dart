@@ -89,17 +89,7 @@ class _PantallaInicioState extends State<PantallaInicio> {
                 );
               },
             ),
-            ListTile(
-              title: const Text('Tarjetas'),
-              leading: const Icon(Icons.credit_card),
-              onTap: () {
-                 routeName ="PantallaInicio";
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => displayTarjetas()),
-                      );
-              },
-            ),
+            
              ListTile(
               title: const Text('Perfil'),
               leading: const Icon(Icons.person),
@@ -120,19 +110,8 @@ class _PantallaInicioState extends State<PantallaInicio> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const Text(
-                'Estamos alegres de tenerte por aqui',
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 16),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(20), // Define el radio de la esquina para redondear la imagen
-                child: const Image(
-                  image: NetworkImage('https://www.emprenomic.com/wp-content/uploads/2016/05/hotel.jpg'),
-                ),
-              ),
+              
+              
 
               const SizedBox(height: 16),
               GridView.count(
@@ -147,8 +126,8 @@ class _PantallaInicioState extends State<PantallaInicio> {
                         MaterialPageRoute(builder: (context) => const habitaciones()),
                       );
                     },
-                    icon: const Icon(Icons.search, color: Colors.black),
-                    label: const Text('Buscar Habitaciones', style: TextStyle(fontSize: 14, color: Colors.black)),
+                    icon: const Icon(Icons.slideshow, color: Colors.black),
+                    label: const Text('Ver Habitaciones', style: TextStyle(fontSize: 14, color: Colors.black)),
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                       backgroundColor: Colors.grey, // Cambia el color de fondo del botón
@@ -162,7 +141,7 @@ class _PantallaInicioState extends State<PantallaInicio> {
                       );
                     },
                     icon: const Icon(Icons.view_agenda, color: Colors.black),
-                    label: const Text('Ver\nReservaciones\nPor Pagar', style: TextStyle(fontSize: 13.5, color: Colors.black)),
+                    label: const Text('Ver\nReservaciones\nPagadas', style: TextStyle(fontSize: 13.5, color: Colors.black)),
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                       backgroundColor: Colors.green, // Cambia el color de fondo del botón
@@ -197,94 +176,8 @@ class _PantallaInicioState extends State<PantallaInicio> {
                     ),
                   ),
                   
-                  const Column(
-                    children: [
-                      SizedBox(height: 20),
-                      Text(
-                        "Nuestras\nUbicaciones:",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      SizedBox(height: 8),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.location_city, color: Colors.black),
-                          SizedBox(width: 8),
-                          Text(
-                            "Danli, El Paraiso",
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.black87,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 4),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.location_city, color: Colors.black),
-                          SizedBox(width: 8),
-                          Text(
-                            "El Paraiso,El Paraiso",
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.black87,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  const Column(
-                    children: [
-                      SizedBox(height: 20),
-                      Text(
-                        "Comunícate con Nosotros:",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      SizedBox(height: 8),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.phone_android, color: Colors.black),
-                          SizedBox(width: 8),
-                          Text(
-                            "Cel: 98787777",
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.black,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 4),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.phone, color: Colors.black),
-                          SizedBox(width: 8),
-                          Text(
-                            "Tel: 22078787",
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.black87,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                  
+  
                 ],
               ),
             ],

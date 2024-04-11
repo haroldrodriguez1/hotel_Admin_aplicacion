@@ -88,11 +88,8 @@ class _ReservasPorPagar extends State<ReservasPorPagar> {
       );
   }
   
- 
- 
-}
+ Widget displayCard(MongoReservaHabitaciones data,BuildContext context){
 
-Widget displayCard(MongoReservaHabitaciones data,BuildContext context){
    Future<void> _deleteReserva(var ids,String habitacion,String usuario,String fechainicio,
    String fechafinal, String namereservador, String idreservador,  String personas, String precio,BuildContext context)async {
     final updatedata=MongoReservaHabitaciones(id:ids , habitacion: habitacion,
@@ -103,18 +100,47 @@ Widget displayCard(MongoReservaHabitaciones data,BuildContext context){
       personas: personas,
        precio: precio);
        
-       await MongoDatabase.deleteReserva(updatedata).whenComplete(
-        
-        () => Navigator.push(
-                     context,
-                    MaterialPageRoute(
-                    builder: (BuildContext context){
-                      return const PantallaInicio();
-                    },
-                   
-                    )));
+       await MongoDatabase.deleteReserva(updatedata);
 
    } 
+
+    void mostrarAlerta(BuildContext context, int action, String mensaje ) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text("Confirmar acción"),
+        content: Text("¿Estás seguro de querer $mensaje esta reserva?"),
+        actions: [
+                  TextButton(
+            child: Text("Cancelar"),
+            onPressed: () {
+              Navigator.of(context).pop(); 
+            },
+          ),
+          TextButton(
+            child: Text("Sí, $mensaje"),
+            onPressed: () async{
+              if(action==1){
+               await _deleteReserva(data.id, data.habitacion, 
+                data.usuario, data.fechainicio, data.fechafinal,
+                 data.namereservador, data.idreservador,
+                  data.personas, data.precio, context);
+           Navigator.of(context).pop(); 
+
+              } 
+             
+              setState(() {
+                
+              });
+            },
+          ),
+
+        ],
+      );
+    },
+  );
+}
   return Card( color: Colors.blue,
     child: Padding(
       padding: const EdgeInsets.all(15.0),
@@ -124,26 +150,13 @@ Widget displayCard(MongoReservaHabitaciones data,BuildContext context){
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text("Pagar:"),
-                  IconButton(onPressed: (){
-                routeName="pagar";
-               Navigator.push(
-                     context,
-                    MaterialPageRoute(
-                    builder: (BuildContext context){
-                      return const displayTarjetas();
-                    },
-                    settings: RouteSettings(arguments: data)
-                    ));
-              }, icon: const Icon(Icons.payment),color: Colors.white,iconSize: 40),
+                  
               const SizedBox(width: 20,),
               const Text("Eliminar:"),
 
               IconButton(onPressed: (){
-                _deleteReserva(data.id, data.habitacion, 
-                data.usuario, data.fechainicio, data.fechafinal,
-                 data.namereservador, data.idreservador,
-                  data.personas, data.precio, context);
+                mostrarAlerta(context, 1, "Eliminar");
+                
                
               }, icon: const Icon(Icons.delete_forever),color: Colors.white,iconSize: 40,),
                 ],
@@ -174,3 +187,6 @@ Widget displayCard(MongoReservaHabitaciones data,BuildContext context){
     );
     
 }
+ 
+}
+

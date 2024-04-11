@@ -118,11 +118,11 @@ class _displayTarjetas extends State<displayTarjetas> {
      usuario: usuario, fechainicio: fechainicio, fechafinal: fechafinal,
       namereservador: namereservador, 
       idreservador: idreservador, 
-      estado: 'Pagado', 
+      estado: 'Por Pagar', 
       personas: personas,
        precio: precio);
        
-       await MongoDatabase.updateReserva(updatedata).whenComplete(
+       await MongoDatabase.updateReserva(updatedata,"Por Pagar").whenComplete(
         
         () => Navigator.push(
                      context,
