@@ -32,6 +32,38 @@ class _habitacionesState extends State<habitaciones> {
       bottomRight: Radius.circular(30), 
     ),
       ),
+      actions: [
+        IconButton(onPressed: (){
+              namebotonhabitacion="Insertar";
+              estadoboton = 0;
+                Navigator.push(
+                     context,
+                    MaterialPageRoute(
+                    builder: (BuildContext context){
+                      return insertarHabitacion();
+                    },
+                    
+                    ));
+              }, icon: const Icon(Icons.add_box),
+                  iconSize: 40,
+                  color: Colors.yellow,                
+                  highlightColor: Colors.black,
+                  
+              ),
+              IconButton(onPressed: (){
+              setState(() {
+                
+              });
+              }, icon: const Icon(Icons.refresh),
+                  iconSize: 40,
+                  color: Colors.yellow,                
+                  highlightColor: Colors.black,
+                  
+              ),
+              
+              
+              ],
+              
       ),
       body : Container(
         
@@ -69,10 +101,18 @@ class _habitacionesState extends State<habitaciones> {
       );
     
   }
-}
+  Widget displayCard(MongoHabitaciones data,BuildContext context){
+    Future<void> _deleteHabitacion()async {
+    final updatedata=MongoHabitaciones(id: data.id, 
+    habitacion: data.habitacion,
+     capacidad: data.capacidad, 
+     disponible: data.disponible, 
+     linkimagen: data.linkimagen, 
+     precio_por_Persona: data.precio_por_Persona);
+       
+       await MongoDatabase.deleteHabitacion(updatedata);
 
-Widget displayCard(MongoHabitaciones data,BuildContext context){
-   
+   } 
   return Card( color: Colors.blue,
     child: Padding(
       padding: const EdgeInsets.all(15.0),
@@ -96,6 +136,8 @@ Widget displayCard(MongoHabitaciones data,BuildContext context){
                 children: [
                    const Text("Editar: ",style: TextStyle(fontWeight: FontWeight.bold),),
               IconButton(onPressed: (){
+                estadoboton = 1;
+                namebotonhabitacion = "Actualizar";
                 Navigator.push(
                      context,
                     MaterialPageRoute(
@@ -112,14 +154,40 @@ Widget displayCard(MongoHabitaciones data,BuildContext context){
               ),
               const Text("Eliminar",style: TextStyle(fontWeight: FontWeight.bold),),
               IconButton(onPressed: (){
-                Navigator.push(
-                     context,
-                    MaterialPageRoute(
-                    builder: (BuildContext context){
-                      return reservhabitaciones();
-                    },
-                    settings: RouteSettings(arguments: data)
-                    ));
+                showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text("Confirmar acción"),
+        content: const Text("¿Estás seguro de querer eliminar esta habitacion?"),
+        actions: [
+                  TextButton(
+            child: const Text("Cancelar"),
+            onPressed: () {
+              Navigator.of(context).pop(); 
+            },
+          ),
+          TextButton(
+            child: const Text("Sí, eliminar"),
+            onPressed: () async{
+             
+                
+               await _deleteHabitacion();
+
+           Navigator.of(context).pop(); 
+          setState(() {
+            
+          });
+              
+             
+              
+            },
+          ),
+
+        ],
+      );
+    },
+  );
               }, icon: const Icon(Icons.delete),
                   iconSize: 50,
                   color: Colors.yellow,                
@@ -135,3 +203,5 @@ Widget displayCard(MongoHabitaciones data,BuildContext context){
     );
     
 }
+}
+

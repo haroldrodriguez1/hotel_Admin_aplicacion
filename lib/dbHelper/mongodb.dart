@@ -412,9 +412,61 @@ try {
   }
 }
 
+ static Future<void> updateHabitacion(MongoHabitaciones data) async {
+  userCollection = db!.collection('habitaciones');
+
+  try {
+    var result = await userCollection.findOne({"_id": data.id});
+    if (result != null) {
+      
+      var modifiers = {
+        'habitacion': data.habitacion,
+        'capacidad': data.capacidad,
+        'disponible': data.disponible,
+        'linkimagen': data.linkimagen,
+        'precio_por_Persona': data.precio_por_Persona,
+  
+      };
+
+      var setModifiers = modify;
+      modifiers.forEach((key, value) {
+        setModifiers = setModifiers.set(key, value);
+      });
+
+      var response = await userCollection.updateOne(where.eq('_id', data.id), setModifiers);
+      
+      inspect(response);
+    } else {
+      if (kDebugMode) {
+        print('No document found');
+      }
+    }
+  } catch (e) {
+    if (kDebugMode) {
+      print(e.toString());
+    }
+  }
+}
 
 static Future<void> deleteReserva(MongoReservaHabitaciones data) async {
     userCollection = db!.collection('reservas');
+    
+  try {
+    
+      
+      var response = await userCollection.deleteOne({'_id':data.id});
+     
+      inspect(response);
+     
+  } catch (e) {
+    if (kDebugMode) {
+      print(e.toString());
+    }
+  }
+}
+
+static Future<void> deleteHabitacion(MongoHabitaciones data) async {
+    userCollection = db!.collection('habitaciones');
     
   try {
     

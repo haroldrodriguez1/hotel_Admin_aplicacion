@@ -7,7 +7,8 @@ const MONGO_CON_URL = "mongodb+srv://demo_user:XbcXeoNBPDdSslSh@hotel.zcwuvkq.mo
   const USER_COLLECTION2 = "habitaciones";
     const USER_COLLECTION3 = "reservas";
         const USER_COLLECTION4 = "tarjetas";
-
+String routeName = "" ;//variable para saber en que pantalla estoy
+String namebotonhabitacion= "";
 
 
 

@@ -14,7 +14,6 @@ import 'package:hotel_aplicacion/dbHelper/mongodb.dart';
 import 'package:hotel_aplicacion/pantallas/creditcard.dart';
 import 'package:hotel_aplicacion/pantallas/pantallainicio.dart';
 
-String routeName = "" ;
 class displayTarjetas extends StatefulWidget {
  const displayTarjetas({super.key});
   
@@ -55,7 +54,9 @@ class _displayTarjetas extends State<displayTarjetas> {
                   color: Colors.yellow,                
                   highlightColor: Colors.black,
                   
-              )],
+              ),
+              
+              ],
          
         
       ),

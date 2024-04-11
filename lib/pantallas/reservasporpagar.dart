@@ -161,7 +161,8 @@ class _ReservasPorPagar extends State<ReservasPorPagar> {
               }, icon: const Icon(Icons.delete_forever),color: Colors.white,iconSize: 40,),
                 ],
               ),
-              
+              Text("Usuario: ${data.usuario}", style: const TextStyle(fontWeight: FontWeight.bold )),
+              const SizedBox(height: 5,),
               Text("Habitacion: ${data.habitacion}", style: const TextStyle(fontWeight: FontWeight.bold )),
               const SizedBox(height: 5,),
               Text("Estado :${data.estado}", style: const TextStyle(fontWeight: FontWeight.bold )),
