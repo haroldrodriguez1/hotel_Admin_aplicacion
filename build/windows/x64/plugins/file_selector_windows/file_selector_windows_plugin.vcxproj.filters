@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\TRABAJOS FLUTTER\final_hotel_admin\hotel_cliente_aplicacion\hotel_Admin_aplicacion\windows\flutter\ephemeral\.plugin_symlinks\file_selector_windows\windows\file_selector_windows.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\TRABAJOS FLUTTER\final_hotel_admin\hotel_cliente_aplicacion\hotel_Admin_aplicacion\windows\flutter\ephemeral\.plugin_symlinks\file_selector_windows\windows\file_dialog_controller.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\TRABAJOS FLUTTER\final_hotel_admin\hotel_cliente_aplicacion\hotel_Admin_aplicacion\windows\flutter\ephemeral\.plugin_symlinks\file_selector_windows\windows\file_selector_plugin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\TRABAJOS FLUTTER\final_hotel_admin\hotel_cliente_aplicacion\hotel_Admin_aplicacion\windows\flutter\ephemeral\.plugin_symlinks\file_selector_windows\windows\messages.g.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\TRABAJOS FLUTTER\final_hotel_admin\hotel_cliente_aplicacion\hotel_Admin_aplicacion\windows\flutter\ephemeral\.plugin_symlinks\file_selector_windows\windows\string_utils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\TRABAJOS FLUTTER\final_hotel_admin\hotel_cliente_aplicacion\hotel_Admin_aplicacion\windows\flutter\ephemeral\.plugin_symlinks\file_selector_windows\windows\include\file_selector_windows\file_selector_windows.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\TRABAJOS FLUTTER\final_hotel_admin\hotel_cliente_aplicacion\hotel_Admin_aplicacion\windows\flutter\ephemeral\.plugin_symlinks\file_selector_windows\windows\file_dialog_controller.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\TRABAJOS FLUTTER\final_hotel_admin\hotel_cliente_aplicacion\hotel_Admin_aplicacion\windows\flutter\ephemeral\.plugin_symlinks\file_selector_windows\windows\file_selector_plugin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\TRABAJOS FLUTTER\final_hotel_admin\hotel_cliente_aplicacion\hotel_Admin_aplicacion\windows\flutter\ephemeral\.plugin_symlinks\file_selector_windows\windows\messages.g.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\TRABAJOS FLUTTER\final_hotel_admin\hotel_cliente_aplicacion\hotel_Admin_aplicacion\windows\flutter\ephemeral\.plugin_symlinks\file_selector_windows\windows\string_utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\TRABAJOS FLUTTER\final_hotel_admin\hotel_cliente_aplicacion\hotel_Admin_aplicacion\windows\flutter\ephemeral\.plugin_symlinks\file_selector_windows\windows\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{71615492-FB6E-398A-A650-56CB502703D5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{736A6CF6-FBA4-31C0-B499-59DEDF5A2D33}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\TRABAJOS FLUTTER\final_hotel_admin\hotel_cliente_aplicacion\hotel_Admin_aplicacion\windows\runner\flutter_window.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\TRABAJOS FLUTTER\final_hotel_admin\hotel_cliente_aplicacion\hotel_Admin_aplicacion\windows\runner\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\TRABAJOS FLUTTER\final_hotel_admin\hotel_cliente_aplicacion\hotel_Admin_aplicacion\windows\runner\utils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\TRABAJOS FLUTTER\final_hotel_admin\hotel_cliente_aplicacion\hotel_Admin_aplicacion\windows\runner\win32_window.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\TRABAJOS FLUTTER\final_hotel_admin\hotel_cliente_aplicacion\hotel_Admin_aplicacion\windows\flutter\generated_plugin_registrant.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\TRABAJOS FLUTTER\final_hotel_admin\hotel_cliente_aplicacion\hotel_Admin_aplicacion\windows\runner\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="D:\TRABAJOS FLUTTER\final_hotel_admin\hotel_cliente_aplicacion\hotel_Admin_aplicacion\windows\runner\Runner.rc">
+      <Filter>Source Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{736A6CF6-FBA4-31C0-B499-59DEDF5A2D33}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

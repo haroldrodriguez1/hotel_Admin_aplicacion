@@ -1,0 +1,1 @@
+ D:\\TRABAJOS\ FLUTTER\\final_hotel_admin\\hotel_cliente_aplicacion\\hotel_Admin_aplicacion\\.dart_tool\\flutter_build\\c270e0450266cd4d274ea50f90674fb8\\native_assets.yaml: 

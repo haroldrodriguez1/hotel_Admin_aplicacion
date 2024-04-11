@@ -1,0 +1,10 @@
+^D:\TRABAJOS FLUTTER\FINAL_HOTEL_ADMIN\HOTEL_CLIENTE_APLICACION\HOTEL_ADMIN_APLICACION\BUILD\WINDOWS\X64\CMAKEFILES\33919D47C09FE8E3295C47D2AB8E721F\GENERATE.STAMP.RULE
+setlocal
+"D:\VISUAL 2022\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" "-SD:/TRABAJOS FLUTTER/final_hotel_admin/hotel_cliente_aplicacion/hotel_Admin_aplicacion/windows" "-BD:/TRABAJOS FLUTTER/final_hotel_admin/hotel_cliente_aplicacion/hotel_Admin_aplicacion/build/windows/x64" --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "D:/TRABAJOS FLUTTER/final_hotel_admin/hotel_cliente_aplicacion/hotel_Admin_aplicacion/build/windows/x64/hotel_aplicacion.sln"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

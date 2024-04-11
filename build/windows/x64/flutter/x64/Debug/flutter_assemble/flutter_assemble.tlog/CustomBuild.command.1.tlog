@@ -1,0 +1,28 @@
+^D:\TRABAJOS FLUTTER\FINAL_HOTEL_ADMIN\HOTEL_CLIENTE_APLICACION\HOTEL_ADMIN_APLICACION\BUILD\WINDOWS\X64\CMAKEFILES\4F106446A3DE38D6A654648E0746D681\FLUTTER_WINDOWS.DLL.RULE
+setlocal
+"D:\VISUAL 2022\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E env FLUTTER_ROOT=D:\flutter "PROJECT_DIR=D:\TRABAJOS FLUTTER\final_hotel_admin\hotel_cliente_aplicacion\hotel_Admin_aplicacion" FLUTTER_ROOT=D:\flutter "FLUTTER_EPHEMERAL_DIR=D:\TRABAJOS FLUTTER\final_hotel_admin\hotel_cliente_aplicacion\hotel_Admin_aplicacion\windows\flutter\ephemeral" "PROJECT_DIR=D:\TRABAJOS FLUTTER\final_hotel_admin\hotel_cliente_aplicacion\hotel_Admin_aplicacion" "FLUTTER_TARGET=D:\TRABAJOS FLUTTER\final_hotel_admin\hotel_cliente_aplicacion\hotel_Admin_aplicacion\lib\main.dart" DART_DEFINES=RkxVVFRFUl9XRUJfQVVUT19ERVRFQ1Q9dHJ1ZQ==,RkxVVFRFUl9XRUJfQ0FOVkFTS0lUX1VSTD1odHRwczovL3d3dy5nc3RhdGljLmNvbS9mbHV0dGVyLWNhbnZhc2tpdC8wNDgxN2M5OWM5ZmQ0OTU2ZjI3NTA1MjA0ZjdlMzQ0MzM1ODEwYWVkLw== DART_OBFUSCATION=false TRACK_WIDGET_CREATION=true TREE_SHAKE_ICONS=false "PACKAGE_CONFIG=D:\TRABAJOS FLUTTER\final_hotel_admin\hotel_cliente_aplicacion\hotel_Admin_aplicacion\.dart_tool\package_config.json" D:/flutter/packages/flutter_tools/bin/tool_backend.bat windows-x64 Debug
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^D:\TRABAJOS FLUTTER\FINAL_HOTEL_ADMIN\HOTEL_CLIENTE_APLICACION\HOTEL_ADMIN_APLICACION\BUILD\WINDOWS\X64\CMAKEFILES\0BC8C61F2D0282E499F230314F8BC0FF\FLUTTER_ASSEMBLE.RULE
+setlocal
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^D:\TRABAJOS FLUTTER\FINAL_HOTEL_ADMIN\HOTEL_CLIENTE_APLICACION\HOTEL_ADMIN_APLICACION\WINDOWS\FLUTTER\CMAKELISTS.TXT
+setlocal
+"D:\VISUAL 2022\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" "-SD:/TRABAJOS FLUTTER/final_hotel_admin/hotel_cliente_aplicacion/hotel_Admin_aplicacion/windows" "-BD:/TRABAJOS FLUTTER/final_hotel_admin/hotel_cliente_aplicacion/hotel_Admin_aplicacion/build/windows/x64" --check-stamp-file "D:/TRABAJOS FLUTTER/final_hotel_admin/hotel_cliente_aplicacion/hotel_Admin_aplicacion/build/windows/x64/flutter/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
