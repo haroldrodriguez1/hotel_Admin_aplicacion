@@ -37,7 +37,7 @@ class MongoDatabase {
 
   static Future<List<Map<String, dynamic>>> getData() async {
 
-    final arrData = await userCollection.find().toList();
+    final arrData = (await userCollection.find().toList()).reversed.toList();
     return arrData;
 
   }
@@ -58,7 +58,7 @@ class MongoDatabase {
       static Future<List<Map<String, dynamic>>> getDataNotificaciones() async {
        userCollection = db!.collection('notificaciones');
     
-    final arrData = await userCollection.find().toList();
+    final arrData = (await userCollection.find().toList()).reversed.toList();
     return arrData;
 
   }
@@ -74,7 +74,7 @@ static Future<List<Map<String, dynamic>>> getDataReservas() async {
     'estado': "Pendiente",
   };
 
-  final arrData = await userCollection.find(query).toList();
+  final arrData = (await userCollection.find(query).toList()).reversed.toList();
 
   return arrData;
 }
@@ -90,7 +90,7 @@ static Future<List<MongoReservaHabitaciones>> getDataReservasPorPagar(String sta
     'estado': state,
   };
     List<MongoReservaHabitaciones> reservasPagadas = [];
-   final data = await userCollection.find(query).toList();
+   final data = (await userCollection.find(query).toList()).reversed.toList();
     for (var reserva in data) {
       reservasPagadas.add(MongoReservaHabitaciones.fromJson(reserva));
     }
@@ -106,7 +106,7 @@ static Future<List<MongoDbModel>> getusuarios() async {
     
   };
     List<MongoDbModel> user = [];
-   final data = await userCollection.find(query).toList();
+   final data = (await userCollection.find(query).toList()).reversed.toList();
     for (var usuario in data) {
       user.add(MongoDbModel.fromJson(usuario));
     }
@@ -131,7 +131,7 @@ static Future<List<Map<String, dynamic>>> getDataReservasPagadas() async {
   };
   
   // Consultar la base de datos para obtener las reservas cuya fecha de inicio sea mañana o posterior
-  final arrData = await userCollection.find(query).toList();
+  final arrData = (await userCollection.find(query).toList()).reversed.toList();
 
   return arrData;
 }
@@ -146,7 +146,7 @@ static Future<List<MongoReservaHabitaciones>> getDataReservasPagadass() async {
     'estado': "Pagado",
   };
     List<MongoReservaHabitaciones> reservasPagadas = [];
-   final data = await userCollection.find(query).toList();
+   final data = (await userCollection.find(query).toList()).reversed.toList();
     for (var reserva in data) {
       reservasPagadas.add(MongoReservaHabitaciones.fromJson(reserva));
     }
@@ -165,7 +165,7 @@ static Future<List<MongoReservaHabitaciones>> getDataHistorial() async {
   }
 };
     List<MongoReservaHabitaciones> reservasPagadas = [];
-   final data = await userCollection.find(query).toList();
+   final data = (await userCollection.find(query).toList()).reversed.toList();
     for (var reserva in data) {
       reservasPagadas.add(MongoReservaHabitaciones.fromJson(reserva));
     }
