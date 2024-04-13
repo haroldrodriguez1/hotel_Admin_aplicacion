@@ -2,24 +2,24 @@
 
 // ignore_for_file: unnecessary_import, unused_local_variable, unnecessary_null_comparison, unused_element, camel_case_types, prefer_const_constructors_in_immutables, use_super_parameters, avoid_unnecessary_containers, non_constant_identifier_names, use_build_context_synchronously, use_key_in_widget_constructors, library_private_types_in_public_api
 
+import 'dart:async';
+import 'dart:ui';
+
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:hotel_aplicacion/dbHelper/MongoDbModelReserva.dart';
 import 'package:hotel_aplicacion/dbHelper/MongoHabitaciones.dart';
 import 'package:hotel_aplicacion/dbHelper/constant.dart';
 
 import 'package:hotel_aplicacion/dbHelper/mongodb.dart';
-import 'package:hotel_aplicacion/pantallas/habitaciones.dart';
 
 
-import 'package:hotel_aplicacion/pantallas/pantalla1.dart';
 import 'package:hotel_aplicacion/pantallas/pantallainicio.dart';
 
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:intl/intl.dart';
 import 'package:mongo_dart/mongo_dart.dart' as mongo;
 
 
@@ -229,17 +229,34 @@ Navigator.pushReplacement(
             FloatingActionButton.extended (
               onPressed: () async {
                 try {
-                  if( habitacioncontroller.text.isNotEmpty){
-
-                  UpdatemiHabitacion();
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Rellenar Campos")));
-                }
-                } catch (e) {
-                  if (kDebugMode) {
-                    print(e);
-                  }
-                }
+  if (habitacioncontroller.text.isNotEmpty && linkcontroller.text.isNotEmpty && preciocontroller.text.isNotEmpty) {
+    final Completer<ImageInfo> completer = Completer<ImageInfo>();
+    final ImageProvider provider = NetworkImage(linkcontroller.text);
+    final ImageStream stream = provider.resolve(ImageConfiguration());
+    stream.addListener(ImageStreamListener((ImageInfo info, bool _) {
+      completer.complete(info);
+    }));
+    final ImageInfo imageInfo;
+    try {
+      imageInfo = await completer.future;
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("La imagen no es válida")));
+      return;
+    }
+    if (imageInfo.image != null) {
+      UpdatemiHabitacion();
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("La imagen no es válida")));
+    }
+  } else {
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Rellenar Campos")));
+  }
+} catch (e) {
+  if (kDebugMode) {
+    print(e);
+  }
+  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("La imagen no es válida")));
+}
                 
               },
               icon: const Icon(Icons.add_box),
@@ -353,18 +370,34 @@ Widget displayCardInsertar( BuildContext context) {
             FloatingActionButton.extended (
               onPressed: () async {
                 try {
-                  if( habitacioncontroller.text.isNotEmpty && linkcontroller.text.isNotEmpty
-                  && preciocontroller.text.isNotEmpty){
-
-                  InsertarmiHabitacion();
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Rellenar Campos")));
-                }
-                } catch (e) {
-                  if (kDebugMode) {
-                    print(e);
-                  }
-                }
+  if (habitacioncontroller.text.isNotEmpty && linkcontroller.text.isNotEmpty && preciocontroller.text.isNotEmpty) {
+    final Completer<ImageInfo> completer = Completer<ImageInfo>();
+    final ImageProvider provider = NetworkImage(linkcontroller.text);
+    final ImageStream stream = provider.resolve(ImageConfiguration());
+    stream.addListener(ImageStreamListener((ImageInfo info, bool _) {
+      completer.complete(info);
+    }));
+    final ImageInfo imageInfo;
+    try {
+      imageInfo = await completer.future;
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("La imagen no es válida")));
+      return;
+    }
+    if (imageInfo.image != null) {
+      InsertarmiHabitacion();
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("La imagen no es válida")));
+    }
+  } else {
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Rellenar Campos")));
+  }
+} catch (e) {
+  if (kDebugMode) {
+    print(e);
+  }
+  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("La imagen no es válida")));
+}
                 
               },
               icon: const Icon(Icons.add_box),
