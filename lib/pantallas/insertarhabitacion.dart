@@ -353,7 +353,8 @@ Widget displayCardInsertar( BuildContext context) {
             FloatingActionButton.extended (
               onPressed: () async {
                 try {
-                  if( habitacioncontroller.text.isNotEmpty){
+                  if( habitacioncontroller.text.isNotEmpty && linkcontroller.text.isNotEmpty
+                  && preciocontroller.text.isNotEmpty){
 
                   InsertarmiHabitacion();
                 } else {
