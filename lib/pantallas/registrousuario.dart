@@ -264,7 +264,7 @@ Stack(
         if (kDebugMode) {
           print("USUARIO NO EXISTENTE, SE INGRESA");
         }
-        
+            await MongoDatabase.updateCodigo(codigo);
            _insertUser();
 
       }

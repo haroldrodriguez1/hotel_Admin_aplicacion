@@ -5,6 +5,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:hotel_aplicacion/dbHelper/ModelCodigoAdmin.dart';
 import 'package:hotel_aplicacion/dbHelper/mongodb.dart';
 import 'package:hotel_aplicacion/pantallas/olvidecontrase%C3%B1a.dart';
 import 'package:hotel_aplicacion/pantallas/pantallainicio.dart';
@@ -12,7 +13,7 @@ import 'package:hotel_aplicacion/pantallas/registrousuario.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 bool checkedValue = false;
 String publicusername = "name";
-
+String? codigo;
 class pantalla1 extends StatefulWidget {
   const pantalla1({super.key});
   @override
@@ -207,11 +208,71 @@ bool showError = false;
   onPressed: () async {
     nameappbar="Registro";
     namebutton="Insertar";
+    var codigocontroller = new TextEditingController();
+
     set = 0;
-    Navigator.push(
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      String randomCode = '';
+      return AlertDialog(
+        title: Text("CODIGO"),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text("Un administrador deberia proporcionar el codigo para crear cuenta de administrador"),
+            TextField(
+              textAlign: TextAlign.center,
+              controller: codigocontroller,
+              decoration: const InputDecoration(labelText: "Codigo"),
+            ),
+            
+          ],
+        ),
+        actions: [
+          TextButton(
+            child: const Text("Cancelar"),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+          TextButton(
+            child: Text("Verificar"),
+            onPressed: () async {
+
+              if(codigocontroller.text.isNotEmpty)
+             {
+              Future<bool> codigoexists = MongoDatabase.getcodigo(codigocontroller.text);
+              if (await codigoexists){
+                codigo = codigocontroller.text;
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => RegistrarUsuario()),
+                );
+                ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('CODIGO VALIDADO')));
+
+              }else{
+                 ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('CODIGO NO DISPONIBLE')));
+              }
+              
+              }else{
+               ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('RELLENAR DATOS')));
+              }
+             // Navigator.of(context).pop();
+
+            },
+          ),
+        ],
+      );
+    },
+  );
+  /*  Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => RegistrarUsuario()),
-    );
+    );*/
   },
   child: Text("Registrarse")
 ),

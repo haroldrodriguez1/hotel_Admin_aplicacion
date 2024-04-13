@@ -14,9 +14,17 @@ class ReservasPorPagar extends StatefulWidget {
   @override
   State<ReservasPorPagar> createState() => _ReservasPorPagar();
 }
-
+   late List<MongoReservaHabitaciones> _originalData =[];
+  final TextEditingController _searchController = TextEditingController();
+  List<MongoReservaHabitaciones> _filteredData = [];
 class _ReservasPorPagar extends State<ReservasPorPagar> {
-
+ @override
+  void initState() {
+    super.initState();
+    _searchController.addListener(() {
+      _filterData();
+    });
+  }
   @override
   Widget build(BuildContext context) {        
     userCollection = db.collection(USER_COLLECTION3);
@@ -47,6 +55,14 @@ class _ReservasPorPagar extends State<ReservasPorPagar> {
         ),
       ),
     ),
+    actions: [
+          IconButton(
+            icon: const Icon(Icons.search),
+            onPressed: () {
+              showSearch(context: context, delegate: _SearchDelegate());
+            },
+          ),
+        ],
       ),
       
       body : Container(
@@ -56,7 +72,7 @@ class _ReservasPorPagar extends State<ReservasPorPagar> {
               
               padding: const EdgeInsets.all(10.0),
               child: FutureBuilder(
-                future : MongoDatabase.getDataReservasPorPagar(),
+                future : MongoDatabase.getDataReservasPorPagar("Por Pagar"),
                 builder: (context, AsyncSnapshot snapshot) {
                  if (snapshot.connectionState==ConnectionState.waiting){
                   return const Center(
@@ -65,13 +81,13 @@ class _ReservasPorPagar extends State<ReservasPorPagar> {
                  }else{
                   if(snapshot.hasData){
                     var totalData = snapshot.data.length;
-                    
+                    _originalData = snapshot.data;                
+                    _filteredData = snapshot.data;                   
                     return ListView.builder(
                       itemCount: totalData,
                       itemBuilder: (context,index){
                         
-                          return displayCard(
-                            MongoReservaHabitaciones.fromJson(snapshot.data[index]),context );
+                         return displayCard(_filteredData[index], context);
                       }
                       ); 
                   }else{
@@ -87,6 +103,82 @@ class _ReservasPorPagar extends State<ReservasPorPagar> {
       ),
       );
   }
+       void _filterData() {
+    setState(() {
+      _filteredData = _filteredData
+          .where((element) =>
+              element.habitacion.contains(_searchController.text) ||
+              element.estado.contains(_searchController.text) ||
+              element.fechainicio.contains(_searchController.text) ||
+              element.fechafinal.contains(_searchController.text) ||
+              element.namereservador.contains(_searchController.text) ||
+              element.idreservador.contains(_searchController.text) ||
+              element.personas.contains(_searchController.text) ||
+              element.precio.contains(_searchController.text))
+          .toList();
+    });
+  }
+
+}
+class _SearchDelegate extends SearchDelegate {
+  @override
+  List<Widget> buildActions(BuildContext context) {
+    return [
+      IconButton(
+        icon: const Icon(Icons.clear),
+        onPressed: () {
+          query = '';
+        },
+      ),
+    ];
+  }
+
+  @override
+  Widget buildLeading(BuildContext context) {
+    return IconButton(
+      icon: const Icon(Icons.arrow_back),
+      onPressed: () {
+        close(context, null);
+      },
+    );
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    return Container();
+  }
+
+ @override
+Widget buildSuggestions(BuildContext context) {
+  if (query.isEmpty) {
+    _filteredData = _originalData;
+    return ListView.builder(
+      itemCount: _filteredData.length,
+      itemBuilder: (context, index) {
+        return displayCard(_filteredData[index], context);
+      },
+    );
+  } else {
+    _filteredData = _originalData
+        .where((element) =>
+            element.habitacion.contains(query) ||
+            element.estado.contains(query) ||
+            element.fechainicio.contains(query) ||
+            element.fechafinal.contains(query) ||
+            element.namereservador.contains(query) ||
+            element.idreservador.contains(query) ||
+            element.personas.contains(query) ||
+            element.precio.contains(query))
+        .toList();
+    return ListView.builder(
+      itemCount: _filteredData.length,
+      itemBuilder: (context, index) {
+        return displayCard(_filteredData[index], context);
+      },
+    );
+  }
+}
+}
   
  Widget displayCard(MongoReservaHabitaciones data,BuildContext context){
 
@@ -129,10 +221,8 @@ class _ReservasPorPagar extends State<ReservasPorPagar> {
            Navigator.of(context).pop(); 
 
               } 
-             
-              setState(() {
-                
-              });
+             Navigator.of(context).pop();
+              
             },
           ),
 
@@ -189,5 +279,5 @@ class _ReservasPorPagar extends State<ReservasPorPagar> {
     
 }
  
-}
+
 

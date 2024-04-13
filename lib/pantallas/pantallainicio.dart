@@ -1,16 +1,25 @@
 // ignore_for_file: use_super_parameters, library_private_types_in_public_api, prefer_const_constructors
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:hotel_aplicacion/dbHelper/ModelCodigoAdmin.dart';
+import 'package:hotel_aplicacion/dbHelper/mongodb.dart';
 import 'package:hotel_aplicacion/pantallas/displaynotificaciones.dart';
 import 'package:hotel_aplicacion/pantallas/displaytarjetas.dart';
 import 'package:hotel_aplicacion/pantallas/habitaciones.dart';
 import 'package:hotel_aplicacion/pantallas/pantalla1.dart';
 import 'package:hotel_aplicacion/pantallas/perfilview.dart';
+import 'package:hotel_aplicacion/pantallas/registrousuario.dart';
 import 'package:hotel_aplicacion/pantallas/reportarproblemas.dart';
 import 'package:hotel_aplicacion/pantallas/reservaspagadas.dart';
 import 'package:hotel_aplicacion/pantallas/reservaspendientes.dart';
 import 'package:hotel_aplicacion/pantallas/reservasporpagar.dart';
+import 'package:hotel_aplicacion/pantallas/usuarios.dart';
 import 'package:hotel_aplicacion/pantallas/verhistorial.dart';
+import 'package:mongo_dart/mongo_dart.dart' as M;
+
 
 class PantallaInicio extends StatefulWidget {
   const PantallaInicio({Key? key}) : super(key: key);
@@ -21,27 +30,101 @@ class PantallaInicio extends StatefulWidget {
 
 class _PantallaInicioState extends State<PantallaInicio> {
   int _selectedIndex = 0;
+     var codigocontroller = new TextEditingController();
+  String generateRandomCode(int length) {
+  const String chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  Random rnd = Random();
+  String code = '';
+  for (int i = 0; i < length; i++) {
+    code += chars[rnd.nextInt(chars.length)];
+  }
+  return code;
+}
+
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
-      if (_selectedIndex == 0){
-        Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => ReservasPagadas()),
-      );
-      }
       if (_selectedIndex == 1){
-        Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => RepoprtarProblema()),
-      );
-      }
-      if (_selectedIndex == 2){
         Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => displayNotificaciones()),
       );
       }
+      if (_selectedIndex == 0){
+      showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      String randomCode = '';
+      return AlertDialog(
+        title: Text("GENERAR CODIGO"),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text("Cuando una persona quiera crear una cuenta de administrador tendra que ingresar este codigo, de esta manera protegemos tus datos, ya que solo una persona con credenciales de administrador podra generar este codigo"),
+            TextField(
+              textAlign: TextAlign.center,
+              controller: codigocontroller,
+              readOnly: true,
+              decoration: const InputDecoration(labelText: "Codigo"),
+            ),
+            const SizedBox(height: 16),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  child: const Text("Generar Codigo"),
+                  onPressed: () {
+                    randomCode = generateRandomCode(6);
+                    codigocontroller.text = randomCode;
+                    
+                  },
+                ),
+                const SizedBox(width: 16),
+                ElevatedButton(
+                  child: const Text("Copiar"),
+                  onPressed: () {
+                    Clipboard.setData(ClipboardData(text: randomCode));
+                   ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Copiado al Portapapeles')),
+                    );                  
+                  },
+                ),
+                
+              ],
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            child: const Text("Cancelar"),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+          TextButton(
+            child: Text("Hacer este codigo valido"),
+            onPressed: () async {
+              if(codigocontroller.text.isNotEmpty)
+             {
+              final data = ModelcodigoAdmin(id: M.ObjectId(),
+              codigo: codigocontroller.text, 
+              usado: false);
+              await MongoDatabase.insertCodigo(data);
+              ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('CODIGO VALIDADO')));
+              Navigator.of(context).pop();
+              }else{
+               ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('RELLENAR DATOS')));
+              }
+            },
+          ),
+        ],
+      );
+    },
+  );
+      }
+      
     });
   }
   @override
@@ -141,7 +224,7 @@ class _PantallaInicioState extends State<PantallaInicio> {
                       );
                     },
                     icon: const Icon(Icons.view_agenda, color: Colors.black),
-                    label: const Text('Ver\nReservaciones\nPagadas', style: TextStyle(fontSize: 13.5, color: Colors.black)),
+                    label: const Text('Ver\nReservaciones\nPor Pagar', style: TextStyle(fontSize: 13.5, color: Colors.black)),
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                       backgroundColor: Colors.green, // Cambia el color de fondo del botón
@@ -175,7 +258,34 @@ class _PantallaInicioState extends State<PantallaInicio> {
                       backgroundColor: Colors.brown, // Cambia el color de fondo del botón
                     ),
                   ),
-                  
+            ElevatedButton.icon(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const ReservasPagadas()),
+                      );
+                    },
+                    icon: const Icon(Icons.history, color: Colors.black),
+                    label: const Text('Ver\nReservas\nPagadas', style: TextStyle(fontSize: 14, color: Colors.black)),
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                      backgroundColor: Colors.blue, // Cambia el color de fondo del botón
+                    ),
+                  ),
+              ElevatedButton.icon(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const usuarios()),
+                      );
+                    },
+                    icon: const Icon(Icons.history, color: Colors.black),
+                    label: const Text('Usuarios', style: TextStyle(fontSize: 14, color: Colors.black)),
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                      backgroundColor: Colors.yellow, // Cambia el color de fondo del botón
+                    ),
+                  ),
                   
   
                 ],
@@ -189,13 +299,10 @@ class _PantallaInicioState extends State<PantallaInicio> {
         
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Habitaciones',
+            icon: Icon(Icons.person_add_alt_1),
+            label: 'Usuario',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.report_problem),
-            label: 'Reportar',
-          ),
+          
           BottomNavigationBarItem(
             icon: Icon(Icons.notifications_active),
             label: 'Notificaciones',

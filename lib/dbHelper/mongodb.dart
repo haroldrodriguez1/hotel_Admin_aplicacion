@@ -3,6 +3,7 @@
 import 'dart:developer';
 
 import 'package:flutter/foundation.dart';
+import 'package:hotel_aplicacion/dbHelper/ModelCodigoAdmin.dart';
 import 'package:hotel_aplicacion/dbHelper/ModelTarjeta.dart';
 import 'package:hotel_aplicacion/dbHelper/MongoDBModel.dart';
 import 'package:hotel_aplicacion/dbHelper/MongoDbModelReserva.dart';
@@ -56,12 +57,7 @@ class MongoDatabase {
 
       static Future<List<Map<String, dynamic>>> getDataNotificaciones() async {
        userCollection = db!.collection('notificaciones');
-    final query = {
     
-    //'username': publicusername,
-    
-
-  };
     final arrData = await userCollection.find().toList();
     return arrData;
 
@@ -69,44 +65,55 @@ class MongoDatabase {
 
  
 static Future<List<Map<String, dynamic>>> getDataReservas() async {
-  // Obtener la fecha de mañana
   DateTime fechaManana = DateTime.now();
   
-  // Convertir la fecha de mañana al formato 'yyyy-MM-dd'
   String fechaMananaFormatted = "${fechaManana.year}-${fechaManana.month.toString().padLeft(2, '0')}-${fechaManana.day.toString().padLeft(2, '0')}";
 
-  // Crear el filtro de consulta
   final query = {
     'fechainicio': {r'$gte': fechaMananaFormatted},
     'estado': "Pendiente",
   };
 
-  // Consultar la base de datos para obtener las reservas cuya fecha de inicio sea mañana o posterior
   final arrData = await userCollection.find(query).toList();
 
   return arrData;
 }
-static Future<List<Map<String, dynamic>>> getDataReservasPorPagar() async {
+
+static Future<List<MongoReservaHabitaciones>> getDataReservasPorPagar(String state) async {
+   DateTime fechaManana = DateTime.now();
+  
+  String fechaMananaFormatted = "${fechaManana.year}-${fechaManana.month.toString().padLeft(2, '0')}-${fechaManana.day.toString().padLeft(2, '0')}";
         userCollection = db!.collection('reservas');
 
-  // Obtener la fecha de mañana
-  DateTime fechaManana = DateTime.now();
-  
-  // Convertir la fecha de mañana al formato 'yyyy-MM-dd'
-  String fechaMananaFormatted = "${fechaManana.year}-${fechaManana.month.toString().padLeft(2, '0')}-${fechaManana.day.toString().padLeft(2, '0')}";
-
-  // Crear el filtro de consulta
   final query = {
     'fechainicio': {r'$gte': fechaMananaFormatted},
-    'usuario': publicusername,
-    'estado': "Por Pagar",
+    'estado': state,
   };
-  
-  // Consultar la base de datos para obtener las reservas cuya fecha de inicio sea mañana o posterior
-  final arrData = await userCollection.find(query).toList();
-
-  return arrData;
+    List<MongoReservaHabitaciones> reservasPagadas = [];
+   final data = await userCollection.find(query).toList();
+    for (var reserva in data) {
+      reservasPagadas.add(MongoReservaHabitaciones.fromJson(reserva));
+    }
+    return reservasPagadas;
 }
+
+
+static Future<List<MongoDbModel>> getusuarios() async {
+          userCollection = db!.collection('hotel');
+
+  final query = {
+    'username': { '\$exists': true }
+    
+  };
+    List<MongoDbModel> user = [];
+   final data = await userCollection.find(query).toList();
+    for (var usuario in data) {
+      user.add(MongoDbModel.fromJson(usuario));
+    }
+    return user;
+}
+
+
 
 static Future<List<Map<String, dynamic>>> getDataReservasPagadas() async {
         userCollection = db!.collection('reservas');
@@ -120,7 +127,6 @@ static Future<List<Map<String, dynamic>>> getDataReservasPagadas() async {
   // Crear el filtro de consulta
   final query = {
     'fechainicio': {r'$gte': fechaMananaFormatted},
-    'usuario': publicusername,
     'estado': "Pagado",
   };
   
@@ -129,20 +135,42 @@ static Future<List<Map<String, dynamic>>> getDataReservasPagadas() async {
 
   return arrData;
 }
-
-static Future<List<Map<String, dynamic>>> getDataHistorial() async {
+static Future<List<MongoReservaHabitaciones>> getDataReservasPagadass() async {
+   DateTime fechaManana = DateTime.now();
   
+  String fechaMananaFormatted = "${fechaManana.year}-${fechaManana.month.toString().padLeft(2, '0')}-${fechaManana.day.toString().padLeft(2, '0')}";
+        userCollection = db!.collection('reservas');
 
-  // Crear el filtro de consulta
   final query = {
-    
-    'usuario': publicusername
+    'fechainicio': {r'$gte': fechaMananaFormatted},
+    'estado': "Pagado",
   };
+    List<MongoReservaHabitaciones> reservasPagadas = [];
+   final data = await userCollection.find(query).toList();
+    for (var reserva in data) {
+      reservasPagadas.add(MongoReservaHabitaciones.fromJson(reserva));
+    }
+    return reservasPagadas;
+  }
 
-  // Consultar la base de datos para obtener las reservas cuya fecha de inicio sea mañana o posterior
-  final arrData = await userCollection.find(query).toList();
 
-  return arrData;
+static Future<List<MongoReservaHabitaciones>> getDataHistorial() async {
+
+        userCollection = db!.collection('reservas');
+
+ 
+    final query = {
+  '\$expr': {
+    '\$gt': [ { '\$toDouble': '\$precio' }, 1 ]
+  }
+};
+    List<MongoReservaHabitaciones> reservasPagadas = [];
+   final data = await userCollection.find(query).toList();
+    for (var reserva in data) {
+      reservasPagadas.add(MongoReservaHabitaciones.fromJson(reserva));
+    }
+    return reservasPagadas;
+    
 }
 
   static Future<void> gethabitacion(ObjectId ide) async {
@@ -173,6 +201,19 @@ static Future<List<Map<String, dynamic>>> getDataHistorial() async {
 
 }
 
+  static Future<bool> getcodigo(String codigo) async {
+        userCollection = db!.collection('codigos');
+
+  var arrData = await userCollection.findOne({"codigo": codigo ,"usado":false });
+  if (arrData != null){
+    arrData = true;
+  }else{
+    arrData = false;
+  }
+  return arrData;
+
+}
+
 
  static Future<bool> registro(String name) async {
         userCollection = db!.collection('hotel');
@@ -190,6 +231,8 @@ static Future<List<Map<String, dynamic>>> getDataHistorial() async {
 
   static Future<String> insert(MongoDbModel data) async {
     try {
+       userCollection = db!.collection('hotel');
+
       var result = await userCollection.insertOne(data.toJson());
       if (result.isSuccess){
         return "DATOS INSERTADOS";
@@ -205,6 +248,8 @@ static Future<List<Map<String, dynamic>>> getDataHistorial() async {
   }
    static Future<String> insertHabitacion(MongoHabitaciones data) async {
     try {
+             userCollection = db!.collection('habitaciones');
+
       var result = await userCollection.insertOne(data.toJson());
       if (result.isSuccess){
         return "DATOS INSERTADOS";
@@ -222,6 +267,29 @@ static Future<List<Map<String, dynamic>>> getDataHistorial() async {
  static Future<String> insertNotificacion( ModelDisplayNotificaciones data) async {
     try {
             userCollection = db!.collection('notificaciones');
+
+      var result = await userCollection.insertOne(data.toJson());
+      if (result.isSuccess){
+        print("DATOS INSERTADOS") ;
+                        return "result";
+
+        
+      }else {
+        print("DATOS INSERTADOS") ;
+                return "result";
+
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print(" Problema al insertar ${e.toString()}");
+      }
+      return(e.toString());
+    }
+  }
+
+   static Future<String> insertCodigo( ModelcodigoAdmin data) async {
+    try {
+            userCollection = db!.collection('codigos');
 
       var result = await userCollection.insertOne(data.toJson());
       if (result.isSuccess){
@@ -357,6 +425,32 @@ try {
      
       
       var response = await userCollection.updateOne(where.eq('username',publicusername),modify.set('contrasenia',contra));
+     
+      inspect(response);
+    } else {
+      if (kDebugMode) {
+        print('No document ');
+      }
+    }
+  } catch (e) {
+    if (kDebugMode) {
+      print(e.toString());
+    }
+  }
+}
+
+ static Future<void> updateCodigo(String? codigo) async {
+    userCollection = db!.collection('codigos');
+    
+  try {
+    var result = await userCollection.findOne({"codigo": codigo});
+    if (result!= null) {
+      if (kDebugMode) {
+        print(result['contrasenia']);
+      }
+     
+      
+      var response = await userCollection.updateOne(where.eq('codigo',codigo),modify.set('usado',true));
      
       inspect(response);
     } else {
