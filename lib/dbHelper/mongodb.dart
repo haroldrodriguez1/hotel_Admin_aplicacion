@@ -99,7 +99,7 @@ static Future<List<MongoReservaHabitaciones>> getDataReservasPorPagar(String sta
 
 
 static Future<List<MongoDbModel>> getusuarios() async {
-          userCollection = db!.collection('hotel');
+          userCollection = db!.collection('admin');
 
   final query = {
     'username': { '\$exists': true }
@@ -118,19 +118,18 @@ static Future<List<MongoDbModel>> getusuarios() async {
 static Future<List<Map<String, dynamic>>> getDataReservasPagadas() async {
         userCollection = db!.collection('reservas');
 
-  // Obtener la fecha de mañana
+  
   DateTime fechaManana = DateTime.now();
   
-  // Convertir la fecha de mañana al formato 'yyyy-MM-dd'
+  
   String fechaMananaFormatted = "${fechaManana.year}-${fechaManana.month.toString().padLeft(2, '0')}-${fechaManana.day.toString().padLeft(2, '0')}";
 
-  // Crear el filtro de consulta
+  
   final query = {
     'fechainicio': {r'$gte': fechaMananaFormatted},
     'estado': "Pagado",
   };
   
-  // Consultar la base de datos para obtener las reservas cuya fecha de inicio sea mañana o posterior
   final arrData = (await userCollection.find(query).toList()).reversed.toList();
 
   return arrData;
@@ -181,7 +180,7 @@ static Future<List<MongoReservaHabitaciones>> getDataHistorial() async {
   return arrData!;
 }
  static Future<void> getProfile() async {
-      userCollection = db!.collection('hotel');
+      userCollection = db!.collection('admin');
 
   final arrData = await userCollection.findOne({"username": publicusername});
 
@@ -189,7 +188,7 @@ static Future<List<MongoReservaHabitaciones>> getDataHistorial() async {
 }
   // ignore: non_constant_identifier_names
   static Future<bool> getuser(String name, String Contrasenia) async {
-  userCollection = db!.collection(USER_COLLECTION);
+  userCollection = db!.collection('admin');
 
   var arrData = await userCollection.findOne({"contrasenia": Contrasenia,"username" : name});
   if (arrData != null){
@@ -216,7 +215,7 @@ static Future<List<MongoReservaHabitaciones>> getDataHistorial() async {
 
 
  static Future<bool> registro(String name) async {
-        userCollection = db!.collection('hotel');
+        userCollection = db!.collection('admin');
 
   var user = await userCollection.findOne({"username": name});
   if(user != null){
@@ -231,7 +230,7 @@ static Future<List<MongoReservaHabitaciones>> getDataHistorial() async {
 
   static Future<String> insert(MongoDbModel data) async {
     try {
-       userCollection = db!.collection('hotel');
+       userCollection = db!.collection('admin');
 
       var result = await userCollection.insertOne(data.toJson());
       if (result.isSuccess){
@@ -361,7 +360,7 @@ static Future<List<MongoReservaHabitaciones>> getDataHistorial() async {
     }
   }
   static Future<bool> recuperarContrasenia(String name) async {
-  userCollection = db!.collection(USER_COLLECTION);
+  userCollection = db!.collection('admin');
   var arrData;
   bool getuser = false;
 try {
@@ -414,7 +413,7 @@ try {
 }
 
    static Future<void> updateContrasenia(String contra) async {
-    userCollection = db!.collection('hotel');
+    userCollection = db!.collection('admin');
     
   try {
     var result = await userCollection.findOne({"username": publicusername});
@@ -466,7 +465,7 @@ try {
 }
 
  static Future<void> updateProfile(MongoDbModel data) async {
-  userCollection = db!.collection('hotel');
+  userCollection = db!.collection('admin');
 
   try {
     var result = await userCollection.findOne({"_id": data.id});

@@ -98,7 +98,7 @@ bool showError = false;
           },
           icon: Icon(
             obscureText ? Icons.visibility_off : Icons.visibility,
-            color: Colors.grey,
+            color: Colors.black,
           ),
               ),],),
                 SizedBox(height: 10,),
@@ -169,8 +169,8 @@ bool showError = false;
                           SizedBox(height: 50,),
           
                 Container(
-                  width: 300,
-                  height: 50,
+                  width: 280,
+                  height: 40,
                   decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(10),
