@@ -379,7 +379,23 @@ Widget displayCardInsertar( BuildContext context) {
     }));
     final ImageInfo imageInfo;
     try {
+      showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return const AlertDialog(
+                      content: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          CircularProgressIndicator(), 
+                          SizedBox(height: 20),
+                          Text("Cargando..."),
+                        ],
+                      ),
+                    );
+                  },
+                );
       imageInfo = await completer.future;
+      Navigator.pop(context);
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("La imagen no es válida")));
       return;

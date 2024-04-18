@@ -147,9 +147,9 @@
     },
     {
       "name": "flutter_plugin_android_lifecycle",
-      "rootUri": "file:///C:/Users/harol/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_plugin_android_lifecycle-2.0.17",
+      "rootUri": "file:///C:/Users/harol/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_plugin_android_lifecycle-2.0.19",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "3.2"
     },
     {
       "name": "flutter_test",
@@ -183,9 +183,9 @@
     },
     {
       "name": "image_picker_android",
-      "rootUri": "file:///C:/Users/harol/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_android-0.8.9+5",
+      "rootUri": "file:///C:/Users/harol/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_android-0.8.9+6",
       "packageUri": "lib/",
-      "languageVersion": "3.1"
+      "languageVersion": "3.2"
     },
     {
       "name": "image_picker_for_web",
@@ -213,7 +213,7 @@
     },
     {
       "name": "image_picker_platform_interface",
-      "rootUri": "file:///C:/Users/harol/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_platform_interface-2.9.4",
+      "rootUri": "file:///C:/Users/harol/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_platform_interface-2.10.0",
       "packageUri": "lib/",
       "languageVersion": "3.3"
     },
@@ -393,15 +393,15 @@
     },
     {
       "name": "shared_preferences",
-      "rootUri": "file:///C:/Users/harol/AppData/Local/Pub/Cache/hosted/pub.dev/shared_preferences-2.2.2",
+      "rootUri": "file:///C:/Users/harol/AppData/Local/Pub/Cache/hosted/pub.dev/shared_preferences-2.2.3",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "3.1"
     },
     {
       "name": "shared_preferences_android",
-      "rootUri": "file:///C:/Users/harol/AppData/Local/Pub/Cache/hosted/pub.dev/shared_preferences_android-2.2.1",
+      "rootUri": "file:///C:/Users/harol/AppData/Local/Pub/Cache/hosted/pub.dev/shared_preferences_android-2.2.2",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "3.2"
     },
     {
       "name": "shared_preferences_foundation",
@@ -495,15 +495,15 @@
     },
     {
       "name": "url_launcher",
-      "rootUri": "file:///C:/Users/harol/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher-6.2.5",
+      "rootUri": "file:///C:/Users/harol/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher-6.2.6",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
     {
       "name": "url_launcher_android",
-      "rootUri": "file:///C:/Users/harol/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher_android-6.3.0",
+      "rootUri": "file:///C:/Users/harol/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher_android-6.3.1",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.2"
     },
     {
       "name": "url_launcher_ios",
@@ -543,7 +543,7 @@
     },
     {
       "name": "uuid",
-      "rootUri": "file:///C:/Users/harol/AppData/Local/Pub/Cache/hosted/pub.dev/uuid-4.3.3",
+      "rootUri": "file:///C:/Users/harol/AppData/Local/Pub/Cache/hosted/pub.dev/uuid-4.4.0",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -590,7 +590,7 @@
       "languageVersion": "3.3"
     }
   ],
-  "generated": "2024-04-11T00:30:58.830538Z",
+  "generated": "2024-04-18T02:30:19.673Z",
   "generator": "pub",
   "generatorVersion": "3.3.0"
 }

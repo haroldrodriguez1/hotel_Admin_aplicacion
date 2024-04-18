@@ -1,4 +1,4 @@
-#Fri Apr 12 21:47:38 CST 2024
+#Fri Apr 12 22:41:48 CST 2024
 base.0=D\:\\TRABAJOS FLUTTER\\final_hotel_admin\\hotel_cliente_aplicacion\\hotel_Admin_aplicacion\\build\\app\\intermediates\\dex\\release\\minifyReleaseWithR8\\classes.dex
 renamed.0=classes.dex
 path.0=classes.dex

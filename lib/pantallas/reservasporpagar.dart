@@ -1,5 +1,5 @@
 
-// ignore_for_file: avoid_unnecessary_containers, no_leading_underscores_for_local_identifiers
+// ignore_for_file: avoid_unnecessary_containers, no_leading_underscores_for_local_identifiers, depend_on_referenced_packages
 
 import 'package:flutter/material.dart';
 import 'package:hotel_aplicacion/dbHelper/MongoDbModelReserva.dart';

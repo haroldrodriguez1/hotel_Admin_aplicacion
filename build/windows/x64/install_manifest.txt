@@ -7,6 +7,7 @@ D:/TRABAJOS FLUTTER/final_hotel_admin/hotel_cliente_aplicacion/hotel_Admin_aplic
 D:/TRABAJOS FLUTTER/final_hotel_admin/hotel_cliente_aplicacion/hotel_Admin_aplicacion/build/windows/x64/runner/Debug/data/flutter_assets/assets/fonts/CourierPrime-Regular.ttf
 D:/TRABAJOS FLUTTER/final_hotel_admin/hotel_cliente_aplicacion/hotel_Admin_aplicacion/build/windows/x64/runner/Debug/data/flutter_assets/assets/fonts/Lato-Bold.ttf
 D:/TRABAJOS FLUTTER/final_hotel_admin/hotel_cliente_aplicacion/hotel_Admin_aplicacion/build/windows/x64/runner/Debug/data/flutter_assets/assets/fonts/Lato-Regular.ttf
+D:/TRABAJOS FLUTTER/final_hotel_admin/hotel_cliente_aplicacion/hotel_Admin_aplicacion/build/windows/x64/runner/Debug/data/flutter_assets/assets/images/8083666.jpg
 D:/TRABAJOS FLUTTER/final_hotel_admin/hotel_cliente_aplicacion/hotel_Admin_aplicacion/build/windows/x64/runner/Debug/data/flutter_assets/assets/images/contact_less.png
 D:/TRABAJOS FLUTTER/final_hotel_admin/hotel_cliente_aplicacion/hotel_Admin_aplicacion/build/windows/x64/runner/Debug/data/flutter_assets/assets/images/mastercard.png
 D:/TRABAJOS FLUTTER/final_hotel_admin/hotel_cliente_aplicacion/hotel_Admin_aplicacion/build/windows/x64/runner/Debug/data/flutter_assets/FontManifest.json
